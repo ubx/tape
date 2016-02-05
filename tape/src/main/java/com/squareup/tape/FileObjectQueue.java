@@ -25,13 +25,13 @@ import static java.util.Collections.unmodifiableList;
  */
 public class FileObjectQueue<T> implements ObjectQueue<T> {
   /** Backing storage implementation. */
-  private final QueueFile queueFile;
+  protected final QueueFile queueFile;
   /** Reusable byte output buffer. */
-  private final DirectByteArrayOutputStream bytes = new DirectByteArrayOutputStream();
+  protected final DirectByteArrayOutputStream bytes = new DirectByteArrayOutputStream();
   /** Keep file around for error reporting. */
-  private final File file;
-  private final Converter<T> converter;
-  private Listener<T> listener;
+  protected final File file;
+  protected final Converter<T> converter;
+  protected Listener<T> listener;
 
   public FileObjectQueue(File file, Converter<T> converter) throws IOException {
     this.file = file;
@@ -155,7 +155,7 @@ public class FileObjectQueue<T> implements ObjectQueue<T> {
   }
 
   /** Enables direct access to the internal array. Avoids unnecessary copying. */
-  private static class DirectByteArrayOutputStream extends ByteArrayOutputStream {
+  protected static class DirectByteArrayOutputStream extends ByteArrayOutputStream {
     public DirectByteArrayOutputStream() {
       super();
     }
